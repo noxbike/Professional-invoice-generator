@@ -24,10 +24,10 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <nav className=" flex justify-between items-center p-4">
+        <nav className="flex justify-between items-center p-4 ">
           <div>
             <Link href="/">
-              <Image src="/logoipsum.svg" alt="logo" width={50} height={50} />
+              <p className="flex flex-row-reverse text-center font-style-italic font-bold"><span className="text-red-500">GEN</span> <span className="text-black">INVOICE</span></p>
             </Link>
           </div>
           <div>
@@ -35,8 +35,8 @@ export default function RootLayout({ children }) {
           </div>
         </nav>
         {children}
-        <footer className="flex justify-center items-center p-4 bottom-0 w-full">
-          <p className="font-bold">© all rights reserved 2025 | <Link href="mickadev.com">mickadev.com</Link></p>
+        <footer className="text-black flex justify-center items-center p-2 w-full">
+          <p>© all rights reserved 2025 | <Link href="mickadev.com">mickadev.com</Link></p>
         </footer>
       </body>
     </html>
