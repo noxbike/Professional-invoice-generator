@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   
@@ -15,13 +16,8 @@ export default function Home() {
               <Image src="/square-check.svg" alt="check" width={25} height={25} />
               <h3>Simple, rapide et efficace</h3>
             </div>
-            <div className="mt-4">
-              <a 
-                className="inline-block bg-blue-600 hover:bg-blue-700 transition-colors text-white text-lg md:text-xl px-8 py-4 rounded-lg shadow-lg hover:shadow-xl" 
-                href="/new_invoice"
-              >
-                Créer une facture
-              </a>
+            <div>
+              <Link className="inline-block bg-blue-600 hover:bg-blue-700 transition-colors text-white text-lg md:text-xl px-8 py-4 rounded-lg shadow-lg hover:shadow-xl" href="/new_invoice">Créer une facture</Link>
             </div>
           </div>
       </div>

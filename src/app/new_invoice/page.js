@@ -1,83 +1,85 @@
-import Image from "next/image";
-import Link from "next/link";
+"use client";
+
+import { useEffect, useState } from "react";
+import Button from "@/components/button";
+import InvoiceGen from "@/components/invoicegen";
+import ProductsServices from "./products_services";
+import Taxes from "./taxes";
+import CustomerInfo from "./customerInfo";
+import CompanyInfo from "./companyInfo";
+import Steps from "./steps";
 
 export default function NewInvoice() {
-  return (
-  <div className="m-6 text-black p-6 flex flex-col align-items-center justify-center max-w-xl m-auto gap-8 border-1 border-gray-200 rounded-lg shadow-lg">
-    <div>
-      <Link href="/">
-        <p className="flex flex-row text-center font-style-italic font-bold">
-          <span className="text-black">INVOICE</span>
-          <span className="text-red-500">GEN</span> 
-        </p>
-      </Link>
-    </div>
-    <div>
-      <ul className="flex flex-row w-full justify-between items-center">
-        <li><p><span>Date: </span><span>01/01/2025</span></p></li>
-        <li><span>N°</span><span>1012025</span></li>
-      </ul>
-    </div>
-    <div className="flex flex-row w-full justify-between items-center">
-      <ul className="flex flex-col">
-        <li className="font-bold">INVOICE GEN</li>
-        <li>37 rue de la paix</li>
-        <li>75000 Paris</li>
-        <li>01 23 45 67 89</li>
-        <li>contact@entreprise.com</li>
-      </ul>
-      <ul className="flex flex-col">
-        <li className="font-bold">Mr John Doe</li>
-        <li>37 rue de la paix</li>
-        <li>75000 Paris</li>
-        <li>01 23 45 67 89</li>
-      </ul>
-    </div>
-    <div>
+  const [date, setDate] = useState(new Date().toLocaleDateString());
+  const [total, setTotal] = useState(0);
+  const [step, setStep] = useState(1);
+  const [tva, setTva] = useState(20);
+  const [remise, setRemise] = useState(10);
+  const [invoiceNumber, setInvoiceNumber] = useState(`1${new Date().getMonth()}${new Date().getFullYear()}`);
+  const [products, setProducts] = useState([
+    {designation: "service 1", quantity: 2, price: 50, total: 100},
+  ]);
+  const [customer, setCustomer] = useState({
+    name: "",
+    address: "",
+    zip: "",
+    phone: "",
+  });
 
-      <div className="flex flex-col gap-4 justify-center align-items-center">
-      <div>
-        <h1 className="text-2xl text-center">Produits / Services</h1>
-      </div>
-        <table>
-          <thead>
-            <tr className="text-left">
-              <th>Désignation</th>
-              <th>Quantité</th>
-              <th>Prix unitaire</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>service 1</td>
-              <td>2</td>
-              <td>50 €</td>
-              <td>100 €</td>
-            </tr>
-          </tbody>
-        </table>
-        <div className="gap-4 flex justify-end">
-          <a href="#" className="bg-blue-500 text-white px-4 py-2 rounded-md">Ajouter un produit/service</a>
+  const updateStep = (step) => {
+    if(step > 0 && step < 5) {
+      setStep(step);
+    }
+  }
+  
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return <CompanyInfo />
+      case 2:
+        return <CustomerInfo customer={customer} setCustomer={setCustomer} />
+      case 3:
+        return <ProductsServices products={products} setProducts={setProducts}/>
+      case 4:
+        return <Taxes total={total} tva={tva} remise={remise} setTva={setTva} setRemise={setRemise} />
+    }
+  }
+
+
+  function calculateTotal() {
+    const total = products.reduce((acc, product) => acc + product.quantity * product.price, 0);
+    const onepercent = total/100
+    const tvacost = onepercent * tva
+    const remisecost = onepercent * remise
+    setTotal(total + tvacost - remisecost);
+  }
+  
+  useEffect(() => {
+    calculateTotal();
+  }, [products]);
+
+  return (
+  <div className="flex flex-col max-w-xl m-auto gap-4 p-2">
+    <Steps step={step} />
+    <div className="m-6 text-black p-6 flex flex-col align-items-center justify-between w-full min-h-[650px] m-auto gap-8 border-1 border-gray-200 rounded-lg shadow-lg">
+      <div className="mr-auto flex flex-col gap-4 w-full">
+        <InvoiceGen />
+        <div>
+          <ul className="flex flex-row w-full justify-between items-center">
+            <li><p><span>Date: </span><span>{date}</span></p></li>
+            <li><span>N°</span><span>{invoiceNumber}</span></li>
+          </ul>
         </div>
       </div>
-    </div>
-    <div className="flex flex-col gap-4">
-      <h1 className="text-2xl text-center">Taxes et réductions</h1>
-      <table className="w-full">
-        <tbody>
-          <tr>
-            <td>TVA 20%</td>
-            <td>Remise -10%</td>
-            <td>TOTAL 117 €</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <div>
+        {renderStep()}
+      </div>
 
-    <div className="flex flex-row align-items-center justify-end gap-4">
-      <a href="#" className="bg-blue-500 text-white px-4 py-2 rounded-md">Télécharger PDF</a>
-      <a href="#" className="bg-blue-500 text-white px-4 py-2 rounded-md">Envoyer par email</a>
+      <div className="flex flex-row align-items-center justify-end gap-4">
+        {step !== 1 && <Button tailwind="bg-blue-500 text-white px-4 py-2 rounded-md" text="Précédent" onClick={() => updateStep(step - 1)} />}
+        {step !== 4 && <Button tailwind="bg-blue-500 text-white px-4 py-2 rounded-md" text="Suivant" onClick={() => updateStep(step + 1)} />}
+        {step === 4 && <Button tailwind="bg-blue-500 text-white px-4 py-2 rounded-md" text="Générer la facture" onClick={() => generateInvoice()} />}
+      </div>
     </div>
-  </div>)
-}
+  </div>
+)}

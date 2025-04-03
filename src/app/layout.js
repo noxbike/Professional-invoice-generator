@@ -2,7 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
 import Link from "next/link";
-
+import InvoiceGen from "@/components/invoicegen";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,9 +26,7 @@ export default function RootLayout({ children }) {
       >
         <nav className="flex justify-between items-center p-4 ">
           <div>
-            <Link href="/">
-              <p className="flex flex-row-reverse text-center font-style-italic font-bold"><span className="text-red-500">GEN</span> <span className="text-black">INVOICE</span></p>
-            </Link>
+            <InvoiceGen />
           </div>
           <div>
             <Link className="bg-blue-500 text-white px-4 py-2 rounded-md" href="/new_invoice">Créer votre facture</Link>
