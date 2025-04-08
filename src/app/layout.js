@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
         <nav className="flex justify-between items-center p-4 ">
           <div>
@@ -33,8 +33,8 @@ export default function RootLayout({ children }) {
           </div>
         </nav>
         {children}
-        <footer className="text-black flex justify-center items-center p-2 w-full">
-          <p>© all rights reserved 2025 | <Link href="mickadev.com">mickadev.com</Link></p>
+        <footer className="text-black bottom-0 text-center p-2 w-full">
+          <p>© all rights reserved 2025 | <Link href="https://mickadev.com">mickadev.com</Link></p>
         </footer>
       </body>
     </html>
