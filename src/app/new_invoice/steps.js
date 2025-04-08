@@ -1,42 +1,57 @@
 export default function steps({step}) {
-    return (
-        <div className="w-full m-auto">     
-            <ol class="flex items-center w-full p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-xs sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse">
-                <li className={`flex items-center ${step === 1 ? "text-blue-600" : "text-gray-500"}`}>
-                    <span className={`flex items-center justify-center w-5 h-5 me-2 text-xs border ${step === 1 ? "border-blue-600" : "border-gray-500"} rounded-full shrink-0`}>
-                        1
-                    </span>
-                    Company
-                    <svg class="w-3 h-3 ms-2 sm:ms-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m7 9 4-4-4-4M1 9l4-4-4-4"/>
-                    </svg>
+    return (  
+            <ol className="sm:ml-[5rem] flex w-full p-3 space-x-2 text-left justify-center items-center">
+                <li className="relative w-full mb-6">
+                    <div className="flex items-center">
+                        <div className={`z-10 flex items-center justify-center w-6 h-6 ${step > 0 ? 'bg-blue-600' :  'bg-gray-200'} rounded-full ring-0 ring-white  sm:ring-8  shrink-0`}>
+                            <svg className={`w-2.5 h-2.5 ${step > 0 ? 'text-blue-100': 'text-gray-900 '} `} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                            </svg>
+                        </div>
+                        <div className="flex w-full bg-gray-200 h-0.5 "></div>
+                    </div>
+                    <div className="mt-3">
+                        <h3 className="font-medium text-gray-900 ">Step 1</h3>
+                    </div>
                 </li>
-                <li className={`flex items-center ${step === 2 ? "text-blue-600" : "text-gray-500"}`}>
-                    <span className={`flex items-center justify-center w-5 h-5 me-2 text-xs border ${step === 2 ? "border-blue-600" : "border-gray-500"} rounded-full shrink-0`}>
-                        2
-                    </span>
-                    Customer
-                    <svg class="w-3 h-3 ms-2 sm:ms-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m7 9 4-4-4-4M1 9l4-4-4-4"/>
-                    </svg>
+                <li className="relative w-full mb-6">
+                    <div className="flex items-center">
+                        <div className={`z-10 flex items-center justify-center w-6 h-6 ${step > 1 ? 'bg-blue-600' :  'bg-gray-200'} rounded-full ring-0 ring-white  sm:ring-8  shrink-0`}>
+                            <svg className={`w-2.5 h-2.5 ${step > 1 ? 'text-blue-100': 'text-gray-900 '} `} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                            </svg>
+                        </div>
+                        <div className="flex w-full bg-gray-200 h-0.5 "></div>
+                    </div>
+                    <div className="mt-3">
+                        <h3 className="font-medium text-gray-900 ">Step 2</h3>
+                    </div>
                 </li>
-                <li className={`flex items-center ${step === 3 ? "text-blue-600" : "text-gray-500"}`}>
-                    <span className={`flex items-center justify-center w-5 h-5 me-2 text-xs border ${step === 3 ? "border-blue-600" : "border-gray-500"} rounded-full shrink-0`}>
-                        3
-                    </span>
-                   Services
-                   <svg class="w-3 h-3 ms-2 sm:ms-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m7 9 4-4-4-4M1 9l4-4-4-4"/>
-                    </svg>
+                <li className="relative w-full mb-6">
+                    <div className="flex items-center">
+                        <div className={`z-10 flex items-center justify-center w-6 h-6 ${step > 2 ? 'bg-blue-600' :  'bg-gray-200'} rounded-full ring-0 ring-white  sm:ring-8  shrink-0`}>
+                            <svg className={`w-2.5 h-2.5 ${step > 2 ? 'text-blue-100': 'text-gray-900 '} `} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                            </svg>
+                        </div>
+                        <div className="flex w-full bg-gray-200 h-0.5 "></div>
+                    </div>
+                    <div className="mt-3">
+                        <h3 className="font-medium text-gray-900 ">Step 3</h3>
+                    </div>
                 </li>
-                <li className={`flex items-center ${step === 4 ? "text-blue-600" : "text-gray-500"}`}>
-                    <span className={`flex items-center justify-center w-5 h-5 me-2 text-xs border ${step === 4 ? "border-blue-600" : "border-gray-500"} rounded-full shrink-0`}>
-                       4
-                    </span>
-                   Taxes
+                <li className="relative w-full mb-6">
+                    <div className="flex items-center">
+                        <div className={`z-10 flex items-center justify-center w-6 h-6 ${step > 3 ? 'bg-blue-600' :  'bg-gray-200'} rounded-full ring-0 ring-white  sm:ring-8  shrink-0`}>
+                            <svg className="w-2.5 h-2.5 {`w-2.5 h-2.5 ${step > 3 ? 'text-blue-100': 'text-gray-900 '} `} " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div className="mt-3">
+                        <h3 className="font-medium text-gray-900 ">Step 4</h3>
+                    </div>
                 </li>
             </ol>
-        </div>
-
     )
 }

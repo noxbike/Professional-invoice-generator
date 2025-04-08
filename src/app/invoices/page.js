@@ -1,5 +1,7 @@
+import invoicesData from '@/data/invoices_data.json'
+
 export default function Invoices() {
-  return <div className="max-w-xl m-auto flex flex-col justify-around align-items-center">
+  return <div className="max-w-4xl m-auto flex flex-col justify-around align-items-center">
     <div className="p-4 gap-4">
         <h1 className="text-3xl font-bold text-black">Invoices</h1>
         <p className="text-gray-600 mt-2">View and manage all your invoices in one place. Search, filter and track payment status.</p>
@@ -29,8 +31,8 @@ export default function Invoices() {
         </div>
     </div>
 
-    <table className="w-full text-sm text-left rtl:text-right text-gray-500 text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase text-gray-400">
+    <table className="w-full text-sm text-left rtl:text-right text-gray-500 light:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase light:text-gray-400">
             <tr>
                 <th scope="col" className="px-6 py-3">
                     invoice
@@ -50,69 +52,31 @@ export default function Invoices() {
             </tr>
         </thead>
         <tbody>
-            <tr className="border-b bg-white border-gray-200 hover:bg-gray-50">
+          {invoicesData.invoices.map((invoice,index) => (
+              <tr key={index} className=" border-b bg-white border-gray-200 hover:bg-gray-50">
                 <td className="px-6 py-4">
-                    #1234
+                    {invoice.invoice_id}
                 </td>
                 <td className="px-6 py-4">
-                    2024-01-15
+                    {invoice.issue_date}
                 </td>
                 <td className="px-6 py-4">
-                    John Smith
+                    {invoice.client.name}
                 </td>
                 <td className="px-6 py-4">
-                    Paid
+                    {invoice.status}
                 </td>
                 <td className="px-6 py-4 text-right">
                     <div className="flex justify-end gap-2">
-                        <a href="#" className="font-medium text-blue-600 hover:underline">View</a>
-                        <a href="#" className="font-medium text-green-600 hover:underline">Edit</a>
-                        <a href="#" className="font-medium text-red-600 hover:underline">Delete</a>
+                        <a href={`/invoices/${index}`} className="font-medium text-blue-600 hover:underline">View</a>
+                        <a href={`/invoices/${index}`} className="font-medium text-green-600 hover:underline">Edit</a>
+                        <a href={`/invoices/${index}`} className="font-medium text-red-600 hover:underline">Delete</a>
                     </div>
                 </td>
             </tr>
-            <tr className="border-b bg-white border-gray-200 hover:bg-gray-50">
-                <td className="px-6 py-4">
-                    #1235
-                </td>
-                <td className="px-6 py-4">
-                    2024-01-16
-                </td>
-                <td className="px-6 py-4">
-                    Sarah Johnson
-                </td>
-                <td className="px-6 py-4">
-                    Pending
-                </td>
-                <td className="px-6 py-4 text-right">
-                    <div className="flex justify-end gap-2">
-                        <a href="#" className="font-medium text-blue-600 hover:underline">View</a>
-                        <a href="#" className="font-medium text-green-600 hover:underline">Edit</a>
-                        <a href="#" className="font-medium text-red-600 hover:underline">Delete</a>
-                    </div>
-                </td>
-            </tr>
-            <tr className=" border-b bg-white border-gray-200 hover:bg-gray-50">
-                <td className="px-6 py-4">
-                    #1236
-                </td>
-                <td className="px-6 py-4">
-                    2024-01-17
-                </td>
-                <td className="px-6 py-4">
-                    Mike Wilson
-                </td>
-                <td className="px-6 py-4">
-                    Unpaid
-                </td>
-                <td className="px-6 py-4 text-right">
-                    <div className="flex justify-end gap-2">
-                        <a href="#" className="font-medium text-blue-600 hover:underline">View</a>
-                        <a href="#" className="font-medium text-green-600 hover:underline">Edit</a>
-                        <a href="#" className="font-medium text-red-600 hover:underline">Delete</a>
-                    </div>
-                </td>
-            </tr>
+          ))}
+            
+            
         </tbody>
         
     </table>

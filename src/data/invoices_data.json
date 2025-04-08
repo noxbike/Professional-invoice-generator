@@ -1,0 +1,121 @@
+{
+  "invoices": [
+    {
+      "invoice_id": "INV-20250408-001",
+      "issue_date": "2025-04-08",
+      "due_date": "2025-04-22",
+      "status": "En attente",
+      "company": {
+        "name": "Entreprise Exemple SARL",
+        "address": "123 Rue des Lilas, 75000 Paris, France",
+        "email": "contact@entreprise-exemple.fr",
+        "phone": "+33 1 23 45 67 89",
+        "siret": "123 456 789 00010"
+      },
+      "client": {
+        "name": "Jean Dupont",
+        "company": "Client SA",
+        "address": "45 Avenue des Champs, 69000 Lyon, France",
+        "email": "jean.dupont@client-sa.com",
+        "phone": "+33 6 12 34 56 78"
+      },
+      "objet": "Création d'un site vitrine pour Client SA",
+      "items": [
+        {
+          "description": "Développement site web",
+          "quantity": 1,
+          "unit_price": 1500.00,
+          "tax_rate": 20
+        },
+        {
+          "description": "Hébergement annuel",
+          "quantity": 1,
+          "unit_price": 120.00,
+          "tax_rate": 20
+        }
+      ],
+      "subtotal": 1620.00,
+      "tax_total": 324.00,
+      "total": 1944.00,
+      "currency": "EUR",
+      "notes": "Merci pour votre confiance.",
+      "payment_terms": "Paiement à 15 jours"
+    },
+    {
+      "invoice_id": "INV-20250408-002",
+      "issue_date": "2025-04-08",
+      "due_date": "2025-04-30",
+      "status": "Payée",
+      "company": {
+        "name": "Entreprise Exemple SARL",
+        "address": "123 Rue des Lilas, 75000 Paris, France",
+        "email": "contact@entreprise-exemple.fr",
+        "phone": "+33 1 23 45 67 89",
+        "siret": "123 456 789 00010"
+      },
+      "client": {
+        "name": "Marie Lefevre",
+        "company": "Lefevre Consulting",
+        "address": "78 Boulevard Voltaire, 75011 Paris, France",
+        "email": "marie.lefevre@lefevre-consulting.fr",
+        "phone": "+33 7 89 01 23 45"
+      },
+      "objet": "Audit technique et recommandations IT",
+      "items": [
+        {
+          "description": "Audit technique",
+          "quantity": 2,
+          "unit_price": 800.00,
+          "tax_rate": 20
+        },
+        {
+          "description": "Rédaction rapport",
+          "quantity": 1,
+          "unit_price": 300.00,
+          "tax_rate": 20
+        }
+      ],
+      "subtotal": 1900.00,
+      "tax_total": 380.00,
+      "total": 2280.00,
+      "currency": "EUR",
+      "notes": "Facture réglée par virement bancaire.",
+      "payment_terms": "Paiement à réception"
+    },
+    {
+      "invoice_id": "INV-20250408-003",
+      "issue_date": "2025-04-08",
+      "due_date": "2025-04-20",
+      "status": "En retard",
+      "company": {
+        "name": "Entreprise Exemple SARL",
+        "address": "123 Rue des Lilas, 75000 Paris, France",
+        "email": "contact@entreprise-exemple.fr",
+        "phone": "+33 1 23 45 67 89",
+        "siret": "123 456 789 00010"
+      },
+      "client": {
+        "name": "Paul Moreau",
+        "company": "Moreau Industries",
+        "address": "12 Route de Bordeaux, 33000 Bordeaux, France",
+        "email": "paul.moreau@moreau-industries.fr",
+        "phone": "+33 6 98 76 54 32"
+      },
+      "objet": "Design UX/UI de l'application interne",
+      "items": [
+        {
+          "description": "Design UX/UI",
+          "quantity": 10,
+          "unit_price": 90.00,
+          "tax_rate": 20
+        }
+      ],
+      "subtotal": 900.00,
+      "tax_total": 180.00,
+      "total": 1080.00,
+      "currency": "EUR",
+      "notes": "Relance envoyée le 06/04/2025.",
+      "payment_terms": "Paiement à 10 jours"
+    }
+  ]
+}

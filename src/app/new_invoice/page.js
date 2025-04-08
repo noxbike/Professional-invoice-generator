@@ -44,24 +44,19 @@ export default function NewInvoice() {
         return <Taxes total={total} tva={tva} remise={remise} setTva={setTva} setRemise={setRemise} />
     }
   }
-
-
-  function calculateTotal() {
+  
+  useEffect(() => {
     const total = products.reduce((acc, product) => acc + product.quantity * product.price, 0);
     const onepercent = total/100
     const tvacost = onepercent * tva
     const remisecost = onepercent * remise
     setTotal(total + tvacost - remisecost);
-  }
-  
-  useEffect(() => {
-    calculateTotal();
-  }, [products]);
+  }, [products, remise, tva]);
 
   return (
-  <div className="flex flex-col max-w-xl m-auto gap-4 p-2">
+  <div className="flex flex-col m-auto max-w-4xl gap-4 p-2">
     <Steps step={step} />
-    <div className="m-6 text-black p-6 flex flex-col align-items-center justify-between w-full min-h-[650px] m-auto gap-8 border-1 border-gray-200 rounded-lg shadow-lg">
+    <div className="m-auto text-black p-6 flex flex-col align-items-center justify-between w-full min-h-[650px] gap-8 border-1 border-gray-200 rounded-lg shadow-lg">
       <div className="mr-auto flex flex-col gap-4 w-full">
         <InvoiceGen />
         <div>
