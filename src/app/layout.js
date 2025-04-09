@@ -24,11 +24,12 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
-        <nav className="flex justify-between items-center p-4 ">
+        <nav className="flex justify-between items-center p-4">
           <div>
             <InvoiceGen />
           </div>
           <div>
+            <Link className='text-blue-500 px-2' href={'/login'}>Login</Link>
             <Link className="bg-blue-500 text-white px-4 py-2 rounded-md" href="/new_invoice">Créer votre facture</Link>
           </div>
         </nav>

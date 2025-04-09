@@ -25,7 +25,7 @@ export default function ProductsServices({products,setProducts}) {
                         <tr>
                             <th>Désignation</th>
                             <th>Quantité</th>
-                            <th>Price/U</th>
+                            <th>Prix/U</th>
                             <th>Total</th>
                         </tr>
                     </thead>
