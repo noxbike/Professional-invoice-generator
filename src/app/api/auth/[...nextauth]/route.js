@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcryptjs";
+import { compare } from "bcryptjs";
 import { getUserByEmail } from "@/database/user";
 
 export const authOptions = {
@@ -12,7 +12,7 @@ export const authOptions = {
 
         const user = await getUserByEmail(email);
 
-        const isValidPassword = await bcrypt.compare(password, user.password);
+        const isValidPassword = await compare(password, user.password);
 
         if (!isValidPassword) {
           throw new Error("Invalid email or password");

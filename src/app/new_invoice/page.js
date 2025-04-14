@@ -8,6 +8,7 @@ import Taxes from "./taxes";
 import CustomerInfo from "./customerInfo";
 import CompanyInfo from "./companyInfo";
 import Steps from "./steps";
+import useAuth from "@/components/useAuth";
 
 export default function NewInvoice() {
   const [date, setDate] = useState(new Date().toLocaleDateString());
@@ -25,6 +26,13 @@ export default function NewInvoice() {
     zip: "",
     phone: "",
   });
+  const { isAuthenticated, isLoading, session } = useAuth();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (!isAuthenticated) {
+    return null;
+  }
 
   const updateStep = (step) => {
     if(step > 0 && step < 5) {
