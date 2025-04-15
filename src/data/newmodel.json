@@ -1,0 +1,71 @@
+{
+    "facture": {
+      "informations_generales": {
+        "numero_facture": "string",
+        "date_emission": "string (AAAA-MM-JJ)",
+        "date_echeance": "string (AAAA-MM-JJ, facultatif)",
+        "reference_commande": "string (facultatif)",
+        "reference_livraison": "string (facultatif)"
+      },
+      "informations_vendeur": {
+        "nom_ou_raison_sociale": "string",
+        "adresse_complete": "string",
+        "code_postal": "string",
+        "ville": "string",
+        "pays": "string (par défaut 'FRANCE')",
+        "numero_tva": "string (format FRXXNNNNNNNNN)",
+        "numero_siret": "string (format NNNNNNNNNNNNNNN)",
+        "mention_rcs": "string (facultatif, ex: 'RCS Paris XXXXXXXX')",
+        "informations_contact": {
+          "telephone": "string (facultatif)",
+          "email": "string (facultatif)"
+        }
+      },
+      "informations_acheteur": {
+        "nom_ou_raison_sociale": "string",
+        "adresse_complete": "string",
+        "code_postal": "string",
+        "ville": "string",
+        "pays": "string",
+        "numero_tva": "string (facultatif, format FRXXNNNNNNNNN ou autre format intracommunautaire)"
+      },
+      "lignes_de_facture": [
+        {
+          "description": "string",
+          "quantite": "number",
+          "unite": "string (facultatif)",
+          "prix_unitaire_ht": "number",
+          "taux_tva": "number (ex: 20.0, 10.0, 5.5, 2.1)",
+          "montant_ht": "number",
+          "montant_tva": "number",
+          "montant_ttc": "number",
+          "reference_produit_ou_service": "string (facultatif)"
+        }
+      ],
+      "totaux": {
+        "total_ht": "number",
+        "total_tva": "number",
+        "total_ttc": "number",
+        "montant_net_a_payer": "number"
+      },
+      "informations_paiement": {
+        "date_limite_paiement": "string (AAAA-MM-JJ)",
+        "mode_paiement": "string (facultatif)",
+        "iban": "string (facultatif)",
+        "bic_swift": "string (facultatif)",
+        "taux_penalites_retard": "number (facultatif, en pourcentage)",
+        "indemnite_forfaitaire_recouvrement": "number (par défaut 40.0)",
+        "conditions_paiement": "string (facultatif)"
+      },
+      "mentions_legales_specifiques": {
+        "autoliquidation_tva": "boolean (true/false)",
+        "regime_marge": "string (facultatif, ex: 'Biens d'occasion')",
+        "tva_non_applicable_article_293b_cgi": "boolean (true/false)",
+        "acompte": "boolean (true/false)",
+        "facture_avoir_reference": "string (facultatif, numéro de la facture d'origine)",
+        "texte_libre": "string (facultatif, pour d'autres mentions légales)"
+      },
+      "informations_supplementaires": "string (facultatif)",
+      "logo_entreprise": "string (URL ou chemin d'accès, facultatif)"
+    }
+  }
