@@ -4,6 +4,7 @@ import "./globals.css";
 import Image from "next/image";
 import Link from "next/link";
 import InvoiceGen from "@/components/invoicegen";
+import Navbar from '@/components/ui/navbar';
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -28,22 +29,7 @@ export default function RootLayout({ children }) {
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-white dark:bg-slate-950`}
         >
-            <nav className="flex justify-between items-center p-4 bg-white dark:bg-black">
-              <div>
-                <InvoiceGen />
-              </div>
-              <div>
-                <Link className="text-blue-500 px-2" href={"/login"}>
-                  Login
-                </Link>
-                <Link
-                  className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                  href="/new_invoice"
-                >
-                  Créer votre facture
-                </Link>
-              </div>
-            </nav>
+            <Navbar/>
             {children}
             <footer className="text-black bottom-0 text-center p-2 w-full">
               <p>

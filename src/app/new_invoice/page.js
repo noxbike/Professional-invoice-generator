@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Button from "@/components/button";
+import Button from "@/components/ui/button";
 import InvoiceGen from "@/components/invoicegen";
 import ProductsServices from "./products_services";
 import Taxes from "./taxes";

@@ -1,6 +1,6 @@
 "use client";
 import { useCallback } from "react";
-import Button from "@/components/button";
+import Button from "@/components/ui/button";
 
 export default function ProductsServices({products,setProducts}) {
     
