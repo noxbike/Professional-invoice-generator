@@ -1,9 +1,8 @@
 import SessionProviderWrapper from './sessionProviderWrapper'
+import CompanyInfoWrapper from '@/components/companyInfoWrapper';
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Image from "next/image";
 import Link from "next/link";
-import InvoiceGen from "@/components/invoicegen";
 import Navbar from '@/components/ui/navbar';
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +29,9 @@ export default function RootLayout({ children }) {
           className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-white dark:bg-slate-950`}
         >
             <Navbar/>
-            {children}
+            <CompanyInfoWrapper>
+              {children}
+            </CompanyInfoWrapper>
             <footer className="text-black bottom-0 text-center p-2 w-full">
               <p>
                 © all rights reserved 2025 |{" "}

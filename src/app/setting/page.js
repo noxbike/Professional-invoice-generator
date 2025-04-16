@@ -1,4 +1,4 @@
-import CompanyInfo from "@/components/companyForm";
+import CompanyInfo from "@/app/company_info/page";
 
 export default function Setting () {
     return(

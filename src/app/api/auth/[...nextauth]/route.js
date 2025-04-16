@@ -31,12 +31,14 @@ export const authOptions = {
       if (user) {
         token.id = user.id;
         token.username = user.username;
+        token.isProfileCompleted = user.isProfileCompleted;
       }
       return token;
     },
     async session({ session, token }) {
       session.user.id = token.id;
       session.user.username = token.username;
+      session.user.isProfileCompleted = token.isProfileCompleted;
       return session;
     },
   },

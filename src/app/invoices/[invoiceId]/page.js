@@ -1,5 +1,5 @@
 import invoicesData from '@/data/invoices_data'
-import InvoiceGen from '@/components/invoicegen';
+import InvoiceGen from '@/components/ui/invoicegen';
 import Image from 'next/image';
 
 export default function InvoicePage({ params }) {
