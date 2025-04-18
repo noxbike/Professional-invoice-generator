@@ -1,6 +1,18 @@
+'use client';
+
 import CompanyInfo from "@/app/company_info/page";
+import useAuth from "@/components/useAuth";
 
 export default function Setting () {
+    const { isAuthenticated, isLoading, session } = useAuth();
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+    
+    if (!isAuthenticated) {
+        return null;
+    }
+
     return(
         <div className="text-black">
             <div className="max-w-4xl mx-auto p-8">

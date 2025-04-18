@@ -18,7 +18,7 @@ export const authOptions = {
           throw new Error("Invalid email or password");
         }
 
-        return { id: user.id, username: user.username, email: user.email };
+        return { id: user.id, username: user.username, isProfileCompleted: user.isProfileCompleted };
       },
     }),
   ],

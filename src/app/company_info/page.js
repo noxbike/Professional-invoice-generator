@@ -1,11 +1,65 @@
+"use client";
+
+import { useState } from "react";
+import { getSession, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 export default function CompanyForm() {
+  const router = useRouter();
+  const { data: session } = useSession();
+  const { update } = useSession();
+  const [logo, setLogo] = useState("/url de l'image");
+  const [company_name, setCompanyName] = useState("");
+  const [address_complete, setAddressComplete] = useState("");
+  const [postal_code, setPostalCode] = useState("");
+  const [phone, setPhone] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [siret_number, setSiretNumber] = useState("");
+  const [tva_number, setTvaNumber] = useState("");
+  const [mention_rcs, setMentionRcs] = useState("");
+  const handleFormSubmit = async(event) => {
+    event.preventDefault();
+    try{
+      const response = fetch("/company_info/api/company", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          logo,
+          company_name,
+          phone,
+          address_complete,
+          postal_code,
+          city,
+          country,
+          tva_number,
+          mention_rcs,
+          siret_number,
+          user_id: session.user.id,
+        })
+      })
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Company info added:', data.company);
+        await update(); // Trigger session update
+        router.push('/invoices'); // Or wherever you redirect after completion
+      } else {
+        const errorData = await response.json();
+        console.error('Error adding company info:', errorData);
+        // Handle error
+      }
+    } catch(error) {
+      console.log(error);
+    };
+  }
   return (
     <div class="bg-gray-100 py-10">
       <div class="max-w-md mx-auto bg-white shadow-md rounded-md p-6">
         <h2 class="text-xl font-semibold mb-4 text-gray-800">
           Informations de l&apos;Entreprise
         </h2>
-        <form class="space-y-4">
+        <form onSubmit={handleFormSubmit} class="space-y-4" noValidate>
           <div>
             <label
               for="nom_ou_raison_sociale"
@@ -18,6 +72,7 @@ export default function CompanyForm() {
               id="nom_ou_raison_sociale"
               name="nom_ou_raison_sociale"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              onChange={(e) => setCompanyName(e.target.value)}
             />
           </div>
 
@@ -33,6 +88,7 @@ export default function CompanyForm() {
               id="adresse_complete"
               name="adresse_complete"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              onChange={(e) => setAddressComplete(e.target.value)}
             />
           </div>
 
@@ -49,6 +105,7 @@ export default function CompanyForm() {
                 id="code_postal"
                 name="code_postal"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                onChange={(e) => setPostalCode(e.target.value)}
               />
             </div>
             <div class="w-1/2">
@@ -63,6 +120,7 @@ export default function CompanyForm() {
                 id="ville"
                 name="ville"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                onChange={(e) => setCity(e.target.value)}
               />
             </div>
           </div>
@@ -78,6 +136,7 @@ export default function CompanyForm() {
               id="pays"
               name="pays"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              onChange={(e) => setCountry(e.target.value)}
             >
               <option value="FRANCE" selected>
                 FRANCE
@@ -101,6 +160,7 @@ export default function CompanyForm() {
               pattern="FR[A-Z]{2}[0-9]{11}"
               placeholder="FRXXNNNNNNNNN"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              onChange={(e) => setTvaNumber(e.target.value)}
             />
           </div>
 
@@ -118,6 +178,7 @@ export default function CompanyForm() {
               pattern="[0-9]{14}"
               placeholder="NNNNNNNNNNNNNNN"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              onChange={(e) => setSiretNumber(e.target.value)}
               required
             />
           </div>
@@ -135,6 +196,7 @@ export default function CompanyForm() {
               name="mention_rcs"
               placeholder="RCS Paris XXXXXXXX"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              onChange={(e) => setMentionRcs(e.target.value)}
             />
           </div>
 
@@ -154,20 +216,7 @@ export default function CompanyForm() {
                 id="telephone"
                 name="informations_contact[telephone]"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
-            <div>
-              <label
-                for="email"
-                class="block text-gray-700 text-sm font-bold mb-2"
-              >
-                Email (facultatif)
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="informations_contact[email]"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
           </div>

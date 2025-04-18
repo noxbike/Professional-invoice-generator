@@ -27,3 +27,9 @@ export const getUserByEmail = async (email) => {
     }
   
 }
+
+export const updateIsProfileCompleted = (user_id, isProfileCompleted) => {
+    const stmt = db.prepare("UPDATE users SET isProfileCompleted = ? WHERE id = ?");
+    const info = stmt.run(isProfileCompleted, user_id);
+    return info.changes;
+};

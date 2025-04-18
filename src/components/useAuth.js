@@ -11,10 +11,14 @@ function useAuth(redirectTo = '/login') {
   const isLoading = status === 'loading';
 
   useEffect(() => {
+    console.log(session);
     if (!isAuthenticated && !isLoading) {
       router.push(`${redirectTo}?callbackUrl=${window.location.pathname}`);
     }
-  }, [isAuthenticated, isLoading, router, redirectTo]);
+    if(isAuthenticated && session.user.isProfileCompleted == false) {
+      router.push('/company_info');
+    }
+  }, [isAuthenticated, isLoading, router, redirectTo, session]);
 
   return { session, status, isAuthenticated, isLoading };
 }
