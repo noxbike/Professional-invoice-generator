@@ -1,15 +1,8 @@
 "use client";
-import invoicesData from "@/data/invoices_data.json";
-import useAuth from "@/components/useAuth";
 
+import invoicesData from "@/data/invoices_data.json";
+import ForceCompleteInfo from "../ForceCompleteInfo";
 function Invoices() {
-  const { isAuthenticated, isLoading, session } = useAuth();
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  if (!isAuthenticated) {
-    return null;
-  }
 
   return (
     <div className="max-w-4xl m-auto flex flex-col justify-around align-items-center">
@@ -108,4 +101,4 @@ function Invoices() {
   );
 }
 
-export default Invoices;
+export default ForceCompleteInfo(Invoices);

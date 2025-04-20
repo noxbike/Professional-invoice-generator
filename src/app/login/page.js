@@ -19,7 +19,7 @@ export default function Login() {
             redirect: false,
             email,
             password,
-            callbackUrl: callbackUrl 
+            callbackUrl: '/company_info' 
         });
 
         if(result?.error) {

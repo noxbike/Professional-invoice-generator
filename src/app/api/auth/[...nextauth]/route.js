@@ -27,7 +27,7 @@ export const authOptions = {
     strategy: "jwt",
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, trigger, user }) {
       if (user) {
         token.id = user.id;
         token.username = user.username;
@@ -35,7 +35,7 @@ export const authOptions = {
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token, user}) {
       session.user.id = token.id;
       session.user.username = token.username;
       session.user.isProfileCompleted = token.isProfileCompleted;

@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { getSession, useSession } from "next-auth/react";
+import { useState,useEffect } from "react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 export default function CompanyForm() {
   const router = useRouter();
   const { data: session } = useSession();
-  const { update } = useSession();
   const [logo, setLogo] = useState("/url de l'image");
   const [company_name, setCompanyName] = useState("");
   const [address_complete, setAddressComplete] = useState("");
@@ -17,6 +16,7 @@ export default function CompanyForm() {
   const [siret_number, setSiretNumber] = useState("");
   const [tva_number, setTvaNumber] = useState("");
   const [mention_rcs, setMentionRcs] = useState("");
+
   const handleFormSubmit = async(event) => {
     event.preventDefault();
     try{
@@ -39,20 +39,15 @@ export default function CompanyForm() {
           user_id: session.user.id,
         })
       })
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Company info added:', data.company);
-        await update(); // Trigger session update
-        router.push('/invoices'); // Or wherever you redirect after completion
-      } else {
-        const errorData = await response.json();
-        console.error('Error adding company info:', errorData);
-        // Handle error
-      }
+      console.log(response);
+      console.log('Company info added successfully');
+     
+      
     } catch(error) {
       console.log(error);
     };
   }
+
   return (
     <div class="bg-gray-100 py-10">
       <div class="max-w-md mx-auto bg-white shadow-md rounded-md p-6">

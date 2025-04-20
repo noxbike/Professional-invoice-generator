@@ -1,17 +1,9 @@
 'use client';
 
 import CompanyInfo from "@/app/company_info/page";
-import useAuth from "@/components/useAuth";
+import ForceCompleteInfo from "@/app/ForceCompleteInfo";
 
-export default function Setting () {
-    const { isAuthenticated, isLoading, session } = useAuth();
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-    
-    if (!isAuthenticated) {
-        return null;
-    }
+function Setting () {
 
     return(
         <div className="text-black">
@@ -154,3 +146,5 @@ export default function Setting () {
         </div>
     )
 }
+
+export default ForceCompleteInfo(Setting);
