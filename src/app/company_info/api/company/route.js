@@ -17,5 +17,5 @@ export async function POST(request) {
 
     await updateIsProfileCompleted(user_id, 1);
 
-    return NextResponse.json({ message: "Company info added successfully" }, { status: 200 });
+    return NextResponse.json({ ok: true }, { status: 200 });
 }

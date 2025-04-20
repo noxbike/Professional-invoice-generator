@@ -2,15 +2,18 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
 export default function ForceCompleteInfo(WrappedComponent) {
   return function Wrapper(props) {
     const router = useRouter();
-    const [loading, setLoading] = useState(true);
+    const {data: session, status} = useSession();
     const [profileComplete, setProfileComplete] = useState("loading");
-    const user_id = 1;
+    
 
     useEffect(() => {
-      if (profileComplete === "loading") {
+      if (!session?.user?.id) return
+
+      if (!profileComplete) {
         const checker = async () => {
           try {
             const response = await fetch("/api/profileCompleted", {
@@ -18,7 +21,7 @@ export default function ForceCompleteInfo(WrappedComponent) {
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ user_id }),
+              body: JSON.stringify({ user_id: session.user.id }),
             });
             const data = await response.json();
             setProfileComplete(data.result);
@@ -29,13 +32,13 @@ export default function ForceCompleteInfo(WrappedComponent) {
         };
         checker();
       }
-    }, [profileComplete]);
+    }, [status, profileComplete, session]);
 
-    if (loading) {
+    if (status === "loading") {
       return <div className="text-black">loading...</div>;
     }
 
-    if (!profileComplete && !loading) {
+    if (!profileComplete && status !== 'loading') {
       redirect("/company_info");
     }
 

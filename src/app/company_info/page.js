@@ -20,7 +20,7 @@ export default function CompanyForm() {
   const handleFormSubmit = async(event) => {
     event.preventDefault();
     try{
-      const response = fetch("/company_info/api/company", {
+      const response = await fetch("/company_info/api/company", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,8 +39,12 @@ export default function CompanyForm() {
           user_id: session.user.id,
         })
       })
-      console.log(response);
-      console.log('Company info added successfully');
+      const data = await response.json();
+      if(data.ok){
+        router.push("/invoices");
+      } else {
+        console.log('failed')
+      }
      
       
     } catch(error) {

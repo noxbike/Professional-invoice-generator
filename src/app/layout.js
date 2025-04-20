@@ -1,8 +1,10 @@
-import SessionProviderWrapper from './sessionProviderWrapper'
+import SessionProviderWrapper from "./sessionProviderWrapper";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
-import Navbar from '@/components/ui/navbar';
+import Navbar from "@/components/ui/navbar";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -20,21 +22,22 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  
+  const session = getServerSession(authOptions);
+
   return (
-    <SessionProviderWrapper>
+    <SessionProviderWrapper session={session}>
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-white dark:bg-slate-950`}
         >
-            <Navbar/>
-              {children}
-            <footer className="text-black bottom-0 text-center p-2 w-full">
-              <p>
-                © all rights reserved 2025 |{" "}
-                <Link href="https://mickadev.com">mickadev.com</Link>
-              </p>
-            </footer>
+          <Navbar />
+          {children}
+          <footer className="text-black bottom-0 text-center p-2 w-full">
+            <p>
+              © all rights reserved 2025 |{" "}
+              <Link href="https://mickadev.com">mickadev.com</Link>
+            </p>
+          </footer>
         </body>
       </html>
     </SessionProviderWrapper>

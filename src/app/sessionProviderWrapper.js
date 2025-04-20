@@ -1,10 +1,11 @@
 'use client';
 
-import { SessionProvider } from 'next-auth/react'; // Assuming you're using NextAuth.js
+import { SessionProvider } from 'next-auth/react';
+
 import React from 'react';
 
-function SessionProviderWrapper({ children }) {
-  return <SessionProvider>{children}</SessionProvider>;
+function SessionProviderWrapper({ children, session }) {
+  return <SessionProvider session={session}>{children}</SessionProvider>;
 }
 
 export default SessionProviderWrapper;
