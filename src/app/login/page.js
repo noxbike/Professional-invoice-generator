@@ -7,7 +7,7 @@ const session = await getServerSession(authOptions);
     if (session) {
       // If user is already logged in, redirect them away from login page
       return (
-        redirect('/invoices')
+        redirect('/dashboard')
       );
     }
   

@@ -6,7 +6,6 @@ import InvoiceGen from "@/components/ui/invoicegen";
 import ProductsServices from "./components/products_services";
 import Taxes from "./components/taxes";
 import CustomerInfo from "./components/customerInfo";
-import CompanyInfo from "./components/companyInfo";
 import Steps from "./components/steps";
 import ForceCompleteInfo from "../ForceCompleteInfo";
 function NewInvoice() {
@@ -26,25 +25,26 @@ function NewInvoice() {
     address: "",
     zip: "",
     phone: "",
+    country:"",
+    tva_number:""
   });
 
   const updateStep = (step) => {
-    if (step > 0 && step < 5) {
+    if (step > 0 && step < 4) {
       setStep(step);
     }
   };
 
   const renderStep = () => {
     switch (step) {
+      
       case 1:
-        return <CompanyInfo />;
-      case 2:
         return <CustomerInfo customer={customer} setCustomer={setCustomer} />;
-      case 3:
+      case 2:
         return (
           <ProductsServices products={products} setProducts={setProducts} />
         );
-      case 4:
+      case 3:
         return (
           <Taxes
             total={total}
@@ -69,53 +69,52 @@ function NewInvoice() {
   }, [products, remise, tva]);
 
   return (
-    <div className="flex flex-col m-auto max-w-4xl gap-4 p-2">
-      <Steps step={step} />
-      <div className="m-auto text-black p-6 flex flex-col align-items-center justify-between w-full min-h-[650px] gap-8 border-1 border-gray-200 rounded-lg shadow-lg">
-        <div className="mr-auto flex flex-col gap-4 w-full">
-          <InvoiceGen />
-          <div>
-            <ul className="flex flex-row w-full justify-between items-center">
+    <div className="mx-auto max-w-4xl py-8 px-4 sm:px-6 lg:px-8">
+    <Steps step={step} />
+    <div className="bg-white rounded-lg shadow-xl overflow-hidden mt-6">
+      <div className="px-4 py-5 sm:p-6">
+        <div className="flex flex-col gap-6">
+          <div className="flex justify-between items-center mb-4">
+            <InvoiceGen />
+            <ul className="flex items-center text-sm text-gray-600 space-x-4">
               <li>
-                <p>
-                  <span>Date: </span>
-                  <span>{date}</span>
-                </p>
+                <span>Date: </span>
+                <span className="font-medium">{date}</span>
               </li>
               <li>
-                <span>N°</span>
-                <span>{invoiceNumber}</span>
+                <span>N°: </span>
+                <span className="font-medium">{invoiceNumber}</span>
               </li>
             </ul>
           </div>
-        </div>
-        <div>{renderStep()}</div>
-
-        <div className="flex flex-row align-items-center justify-end gap-4">
-          {step !== 1 && (
-            <Button
-              tailwind="bg-blue-500 text-white px-4 py-2 rounded-md"
-              text="Précédent"
-              onClick={() => updateStep(step - 1)}
-            />
-          )}
-          {step !== 4 && (
-            <Button
-              tailwind="bg-blue-500 text-white px-4 py-2 rounded-md"
-              text="Suivant"
-              onClick={() => updateStep(step + 1)}
-            />
-          )}
-          {step === 4 && (
-            <Button
-              tailwind="bg-blue-500 text-white px-4 py-2 rounded-md"
-              text="Générer la facture"
-              onClick={() => generateInvoice()}
-            />
-          )}
+          <div>{renderStep()}</div>
         </div>
       </div>
+      <div className="bg-gray-50 px-4 py-3 sm:px-6 flex justify-end gap-3">
+        {step !== 1 && (
+          <Button
+            tailwind="bg-gray-300 text-gray-700 hover:bg-gray-400 px-4 py-2 rounded-md"
+            text="Précédent"
+            onClick={() => updateStep(step - 1)}
+          />
+        )}
+        {step !== 3 && (
+          <Button
+            tailwind="bg-indigo-600 text-white hover:bg-indigo-700 px-4 py-2 rounded-md"
+            text="Suivant"
+            onClick={() => updateStep(step + 1)}
+          />
+        )}
+        {step === 3 && (
+          <Button
+            tailwind="bg-green-500 text-white hover:bg-green-600 px-4 py-2 rounded-md"
+            text="Générer la facture"
+            onClick={() => generateInvoice()}
+          />
+        )}
+      </div>
     </div>
+  </div>
   );
 }
 export default ForceCompleteInfo(NewInvoice);

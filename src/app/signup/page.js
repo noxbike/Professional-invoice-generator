@@ -8,7 +8,7 @@ export default async function Signup() {
     if (session) {
       // If user is already logged in, redirect them away from login page
       return (
-        redirect('/invoices')
+        redirect('/dashboard')
       );
     }
   
